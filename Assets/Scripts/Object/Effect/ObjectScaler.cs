@@ -19,10 +19,9 @@ public class ObjectScaler : MonoBehaviour
     private Vector3 enlargedScale; // 拡大後のスケール
 
     // タグを持つオブジェクトが触れているかのフラグ
-    private bool isTouchingTarget = false;
+    public bool isTouchingTarget = false;
 
-    //// マウス入力を無視するかどうかを管理する
-    //public bool ignoreMouseInput = false;
+    private Tween scaleTween; // 現在のスケールアニメーション用Tween
 
     private void OnEnable()
     {
@@ -59,16 +58,21 @@ public class ObjectScaler : MonoBehaviour
     // タグを持つオブジェクトが触れている場合にのみ処理を実行するメソッド
     private void Update()
     {
-        if (TimeControllerToggle.isTimeStopped || GameStateManager.Instance.IsRotating)
-        {
-            return;
-        }
+        //if (TimeControllerToggle.isTimeStopped || GameStateManager.Instance.IsRotating)
+        //{
+        //    return;
+        //}
 
-        if (isTouchingTarget)
-        {
-            EnlargeObject();
-        }
-        else
+        //if (isTouchingTarget)
+        //{
+        //    EnlargeObject();
+        //}
+        //else
+        //{
+        //    ResetObjectSize();
+        //}
+
+        if (GameTurnManager.Instance.IsTurnChanging)
         {
             ResetObjectSize();
         }
@@ -77,19 +81,38 @@ public class ObjectScaler : MonoBehaviour
     // オブジェクトのサイズを大きくするメソッド
     private void EnlargeObject()
     {
-        if (!targetObject.DOScale(enlargedScale, scaleDuration).IsPlaying())
+        // 現在のアニメーションを停止
+        if (scaleTween != null && scaleTween.IsPlaying())
         {
-            targetObject.DOScale(enlargedScale, scaleDuration).SetEase(Ease.OutBack);
+            scaleTween.Kill();
         }
+
+        scaleTween = targetObject.DOScale(enlargedScale, scaleDuration).SetEase(Ease.OutBack);
     }
 
     // オブジェクトのサイズを徐々に元に戻すメソッド
-    private void ResetObjectSize()
+    public void ResetObjectSize()
     {
-        if (!targetObject.DOScale(originalScale, scaleDuration).IsPlaying())
+        // 現在のアニメーションを停止
+        if (scaleTween != null && scaleTween.IsPlaying())
         {
-            targetObject.DOScale(originalScale, scaleDuration).SetEase(Ease.InOutQuad);
+            return;
         }
+
+        scaleTween = targetObject.DOScale(originalScale, scaleDuration).SetEase(Ease.InOutQuad);
+    }
+
+    // 引数で指定したスケールに設定するメソッド
+    public void SetObjectScale(bool isEnlarged)
+    {
+        // 現在のアニメーションを停止
+        if (scaleTween != null && scaleTween.IsPlaying())
+        {
+            scaleTween.Kill();
+        }
+
+        Vector3 targetScale = isEnlarged ? enlargedScale : originalScale;
+        scaleTween = targetObject.DOScale(targetScale, scaleDuration).SetEase(isEnlarged ? Ease.OutBack : Ease.InOutQuad);
     }
 
     // 入力を処理できるかどうかを判定するメソッド

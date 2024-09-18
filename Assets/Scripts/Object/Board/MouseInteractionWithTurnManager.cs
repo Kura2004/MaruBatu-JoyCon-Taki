@@ -18,8 +18,11 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (colorChanger.isClicked) return;
         if (colorChanger.hoverAndClickColor != GlobalColorManager.Instance.currentColor)
+        {
             colorChanger.ChangeHoverColor(GlobalColorManager.Instance.currentColor);
+        }
     }
 
     private void UpdateColorBasedOnTurn()
@@ -27,13 +30,10 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
         GlobalColorManager.Instance.UpdateColorBasedOnTurn();
     }
 
-    public static bool IsInteractionBlocked()
+    public bool IsInteractionBlocked()
     {
-        var turnManager = GameTurnManager.Instance;
         var stateManager = GameStateManager.Instance;
-        return CanvasBounce.isBlocked ||
-               turnManager.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup) ||
-               turnManager.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup) ||
+        return colorChanger.isClicked ||
                TimeControllerToggle.isTimeStopped ||
                (!stateManager.IsBoardSetupComplete && !stateManager.IsRotating);
     }
@@ -70,5 +70,6 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
         UpdateColorBasedOnTurn(); // êFÇçXêV
         ObjectStateManager.Instance.SetFirstObjectActive(false);
         ObjectStateManager.Instance.SetSecondObjectActive(true);
+        ObjectScaler obj = GetComponent<ObjectScaler>();
     }
 }

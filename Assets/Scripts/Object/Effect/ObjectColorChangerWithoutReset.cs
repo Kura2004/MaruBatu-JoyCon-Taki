@@ -25,10 +25,16 @@ public class ObjectColorChangerWithoutReset : ObjectColorChanger
     //        base.OnMouseDown();
     //}
 
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (isClicked) return;
+        base.OnTriggerEnter(other);
+    }
+
     protected override void OnTriggerExit(Collider other)
     {
-        if (!isClicked)
-            base.OnTriggerExit(other);
+        if (isClicked) return;
+        base.OnTriggerExit(other);
     }
 }
 

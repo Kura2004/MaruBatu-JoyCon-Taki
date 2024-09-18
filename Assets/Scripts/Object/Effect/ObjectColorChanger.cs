@@ -17,8 +17,7 @@ public class ObjectColorChanger : MonoBehaviour
 
     private Renderer objectRenderer; // オブジェクトのRenderer
     private Tween colorTween; // 色の補完用のTween
-    public bool isClicked = false; // クリック状態を保持するフラグ
-    private bool isTouchingTarget = false; // タグを持つオブジェクトが触れているかのフラグ
+    public bool isClicked { get; private set; } = false; // クリック状態を保持するフラグ
 
     protected virtual void Start()
     {
@@ -29,11 +28,10 @@ public class ObjectColorChanger : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(targetTag) && objectRenderer != null)
         {
-            isTouchingTarget = true;
             // タグを持つオブジェクトが触れたときに色を補完的に変える
             colorTween = objectRenderer.material.DOColor(hoverAndClickColor, colorChangeDuration);
         }
@@ -43,29 +41,25 @@ public class ObjectColorChanger : MonoBehaviour
     {
         if (other.CompareTag(targetTag) && objectRenderer != null)
         {
-            isTouchingTarget = false;
             // タグを持つオブジェクトが離れたときに色を元に戻す
             colorTween = objectRenderer.material.DOColor(originalColor, colorChangeDuration);
         }
     }
 
-    private void Update()
+    protected virtual void OnTriggerStay(Collider other)
     {
-        if (isClicked) return;
-        // タグを持つオブジェクトが触れているかつSwitchControllerのAボタンが押されたときに処理を行う
-        if (isTouchingTarget)
-        {
-            if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup)
-                && Input.GetKeyDown((KeyCode)SwitchController.L))
-            {
-                HandleClick();
-            }
+        if (isClicked || !other.CompareTag(targetTag)) return;
 
-            if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece)
-    && Input.GetKeyDown((KeyCode)SwitchController.R))
-            {
-                HandleClick();
-            }
+        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup)
+            && Input.GetKeyDown((KeyCode)SwitchController.L))
+        {
+            HandleClick();
+        }
+
+        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece)
+&& Input.GetKeyDown((KeyCode)SwitchController.R))
+        {
+            HandleClick();
         }
     }
 

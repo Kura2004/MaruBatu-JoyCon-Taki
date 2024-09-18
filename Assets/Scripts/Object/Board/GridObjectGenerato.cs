@@ -10,13 +10,19 @@ public class GridObjectGenerator : MonoBehaviour
     [SerializeField] private float spacing = 1.0f; // 格子点の間隔
     [SerializeField] private Transform gridReferenceTransform; // 格子点の基準となるTransform
     [SerializeField] private float spawnInterval = 2f; // n秒ごとの間隔
+    [SerializeField] private string generatorTag = "DefaultTag"; // 生成器のタグ
+
     private bool onGenerate = false;
     private List<GameObject> generatedObjects = new List<GameObject>(); // 生成されたオブジェクトを保持
+
+    // 生成位置のTransformを保存するリスト
+    public List<Transform> GeneratedPositions { get; private set; } = new List<Transform>();
 
     private void Start()
     {
         GenerateGrid();
     }
+
     private void Update()
     {
         if (GameTurnManager.Instance.IsGameStarted && !onGenerate)
@@ -61,12 +67,16 @@ public class GridObjectGenerator : MonoBehaviour
                     GameObject newObj = Instantiate(prefab, position, Quaternion.identity);
                     newObj.SetActive(false);
                     generatedObjects.Add(newObj);
+
+                    // 生成位置のTransformを保存
+                    Transform positionTransform = new GameObject($"Position_{row}_{column}").transform;
+                    positionTransform.position = position;
+                    GeneratedPositions.Add(positionTransform);
                 }
                 else
                 {
                     Debug.LogWarning($"Prefab at index {prefabIndex} is not assigned.");
                 }
-
                 // インデックスを更新（要素数が `objectPrefabs.Length` でリセット）
                 prefabIndex = (prefabIndex + 1) % objectPrefabs.Length;
             }
@@ -86,6 +96,12 @@ public class GridObjectGenerator : MonoBehaviour
         }
 
         //配置が終わったら削除
-        Destroy(this);
+        //Destroy(this);
+    }
+
+    // 指定したタグと一致するかどうかを確認するメソッド
+    public bool IsTagMatching(string tag)
+    {
+        return generatorTag.Equals(tag);
     }
 }

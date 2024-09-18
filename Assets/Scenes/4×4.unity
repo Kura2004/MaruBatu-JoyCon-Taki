@@ -7945,6 +7945,7 @@ MonoBehaviour:
   spacing: 5
   gridReferenceTransform: {fileID: 7853331954526669866}
   spawnInterval: 0.1
+  generatorTag: Mass
 --- !u!114 &686614639558753618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8333,6 +8334,7 @@ MonoBehaviour:
   spacing: 5
   gridReferenceTransform: {fileID: 7853331954526669866}
   spawnInterval: 0.1
+  generatorTag: Rotation
 --- !u!1 &5171092015921322019
 GameObject:
   m_ObjectHideFlags: 0
@@ -8528,6 +8530,9 @@ GameObject:
   - component: {fileID: 4689660336963294369}
   - component: {fileID: 5812931577591961358}
   - component: {fileID: 8114575477531408689}
+  - component: {fileID: 8114575477531408690}
+  - component: {fileID: 8114575477531408692}
+  - component: {fileID: 8114575477531408691}
   m_Layer: 0
   m_Name: "4\xD74Board"
   m_TagString: Untagged
@@ -8605,6 +8610,54 @@ MonoBehaviour:
   prefab: {fileID: 770763829274680468, guid: 7fa59b4c06e3cdb4fb70f7e93b2a3dd8, type: 3}
   zSpacing: 5
   objectCount: 4
+--- !u!114 &8114575477531408690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6788832715504390381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00feccf33e483144098a20c2ba1ddb91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 6055128367223103756, guid: 7a9e53d2f63427c459ea3b7717315647, type: 3}
+  generatorTag: Mass
+  indexToUse: 5
+  offset: {x: 0, y: 0, z: 0}
+--- !u!114 &8114575477531408691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6788832715504390381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b8ffaccd01cfe418326524f2d39b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnSceneChange: 1
+  firstObjectTag: MassSelecter
+  secondObjectTag: ButtonSelecter
+  delayBeforeFinding: 0.1
+--- !u!114 &8114575477531408692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6788832715504390381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00feccf33e483144098a20c2ba1ddb91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 8153478399688357161, guid: 85bb8ae4fb8530d4f852b09fb945a17a, type: 3}
+  generatorTag: Rotation
+  indexToUse: 0
+  offset: {x: 0, y: 0, z: -2}
 --- !u!65 &8595516318668966998
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8703,6 +8756,7 @@ MonoBehaviour:
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverAndClickColor: {r: 1, g: 0.8709866, b: 0, a: 1}
   colorChangeDuration: 0.3
+  targetTag: Player
   isClicked: 0
 --- !u!65 &9193970656737370365
 BoxCollider:

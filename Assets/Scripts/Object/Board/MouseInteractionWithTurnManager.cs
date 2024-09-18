@@ -1,4 +1,3 @@
-
 using DG.Tweening;
 using UnityEngine;
 
@@ -19,13 +18,13 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        colorChanger.ChangeHoverColor(GlobalColorManager.Instance.currentColor);
+        if (colorChanger.hoverAndClickColor != GlobalColorManager.Instance.currentColor)
+            colorChanger.ChangeHoverColor(GlobalColorManager.Instance.currentColor);
     }
 
     private void UpdateColorBasedOnTurn()
     {
         GlobalColorManager.Instance.UpdateColorBasedOnTurn();
-        colorChanger.ChangeHoverColor(GlobalColorManager.Instance.currentColor);
     }
 
     public static bool IsInteractionBlocked()
@@ -39,7 +38,23 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
                (!stateManager.IsBoardSetupComplete && !stateManager.IsRotating);
     }
 
-    private void OnMouseDown()
+    private void Update()
+    {
+        // SwitchControllerのAボタンが押されたかどうかを検知
+        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) &&
+            Input.GetKeyDown((KeyCode)SwitchController.R))
+        {
+            HandleInteraction();
+        }
+
+        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerPlacePiece) &&
+    Input.GetKeyDown((KeyCode)SwitchController.L))
+        {
+            HandleInteraction();
+        }
+    }
+
+    private void HandleInteraction()
     {
         if (IsInteractionBlocked() || colorChanger.isClicked)
         {
@@ -48,20 +63,12 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
         }
 
         ScenesAudio.ClickSe();
-        colorChanger.OnMouseDown();
+        // Aボタンが押された際にクリック処理を呼び出す
+        //colorChanger.HandleClick();
         GameTurnManager.Instance.SetTurnChange(true);
         GameTurnManager.Instance.AdvanceTurn(); // ターンを進める
         UpdateColorBasedOnTurn(); // 色を更新
-        //Debug.Log("Current color: " + colorChanger.GetComponent<Renderer>().material.color);
+        ObjectStateManager.Instance.SetFirstObjectActive(false);
+        ObjectStateManager.Instance.SetSecondObjectActive(true);
     }
 }
-
-
-
-
-
-
-
-
-
-

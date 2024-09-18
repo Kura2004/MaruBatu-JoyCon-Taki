@@ -7,14 +7,18 @@ public class ObjectColorChanger : MonoBehaviour
     private Color originalColor = Color.white; // 元の色をインスペクターで設定できるように
 
     [SerializeField]
-    private Color hoverAndClickColor = Color.red; // マウスが当たったときとクリック時の色
+    public Color hoverAndClickColor = Color.red; // オブジェクトが触れたときとクリック時の色
 
     [SerializeField]
     private float colorChangeDuration = 1f; // 色の補完にかかる時間
 
+    [SerializeField]
+    private string targetTag = "Player"; // 触れる対象のタグ
+
     private Renderer objectRenderer; // オブジェクトのRenderer
     private Tween colorTween; // 色の補完用のTween
     public bool isClicked = false; // クリック状態を保持するフラグ
+    private bool isTouchingTarget = false; // タグを持つオブジェクトが触れているかのフラグ
 
     protected virtual void Start()
     {
@@ -25,39 +29,53 @@ public class ObjectColorChanger : MonoBehaviour
         }
     }
 
-    protected virtual void OnMouseEnter()
+    private void OnTriggerEnter(Collider other)
     {
-        if (objectRenderer != null)
+        if (other.CompareTag(targetTag) && objectRenderer != null)
         {
-            // マウスがオブジェクトに入ったときに色を補完的に変える
+            isTouchingTarget = true;
+            // タグを持つオブジェクトが触れたときに色を補完的に変える
             colorTween = objectRenderer.material.DOColor(hoverAndClickColor, colorChangeDuration);
         }
     }
 
-    protected virtual void OnMouseExit()
+    protected virtual void OnTriggerExit(Collider other)
     {
-        if (objectRenderer != null)
+        if (other.CompareTag(targetTag) && objectRenderer != null)
         {
-            // マウスがオブジェクトから出たときに色を元に戻す
+            isTouchingTarget = false;
+            // タグを持つオブジェクトが離れたときに色を元に戻す
             colorTween = objectRenderer.material.DOColor(originalColor, colorChangeDuration);
         }
     }
 
-    protected virtual void OnMouseOver()
+    private void Update()
     {
-        if (ShouldChangeColorOnMouseOver())
+        if (isClicked) return;
+        // タグを持つオブジェクトが触れているかつSwitchControllerのAボタンが押されたときに処理を行う
+        if (isTouchingTarget)
         {
-            // マウスがオブジェクトに入ったときに色を補完的に変える
-            colorTween = objectRenderer.material.DOColor(hoverAndClickColor, colorChangeDuration);
+            if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup)
+                && Input.GetKeyDown((KeyCode)SwitchController.L))
+            {
+                HandleClick();
+            }
+
+            if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece)
+    && Input.GetKeyDown((KeyCode)SwitchController.R))
+            {
+                HandleClick();
+            }
         }
     }
 
-    public virtual void OnMouseDown()
+    public void HandleClick()
     {
         if (objectRenderer != null)
         {
             isClicked = true; // クリック状態を記録
             objectRenderer.material.color = hoverAndClickColor;
+            Debug.Log("マスがクリックされました");
         }
     }
 
@@ -66,7 +84,7 @@ public class ObjectColorChanger : MonoBehaviour
         hoverAndClickColor = newColor;
     }
 
-    private bool ShouldChangeColorOnMouseOver()
+    private bool ShouldChangeColorOnTrigger()
     {
         return !GameStateManager.Instance.IsRotating && !isClicked
             && !objectRenderer.material.DOColor(hoverAndClickColor, colorChangeDuration).IsPlaying();

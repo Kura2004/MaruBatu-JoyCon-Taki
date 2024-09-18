@@ -10,6 +10,9 @@ public class RotatingButtonLeft : MonoBehaviour
     [SerializeField]
     private ObjectColorChanger colorChanger; // 色の変更を管理するコンポーネント
 
+    [SerializeField]
+    string selecterTag = "Def";
+
     private bool IsInteractionBlocked()
     {
         var turnManager = GameTurnManager.Instance;
@@ -27,15 +30,26 @@ public class RotatingButtonLeft : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private void OnTriggerStay(Collider other)
     {
         if (IsInteractionBlocked() || !rotatingManager.AnyMassClicked())
         {
-            //ScenesAudio.BlockSe();
             return;
         }
 
-        HandleClickInteraction();
+        if (other.CompareTag(selecterTag) &&
+            GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup) &&
+            Input.GetKeyDown((KeyCode)SwitchController.R))
+        {
+            HandleClickInteraction();
+        }
+
+        if (other.CompareTag(selecterTag) &&
+    GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup) &&
+    Input.GetKeyDown((KeyCode)SwitchController.L))
+        {
+            HandleClickInteraction();
+        }
     }
 
     private void HandleClickInteraction()

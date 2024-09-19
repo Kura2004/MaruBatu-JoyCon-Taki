@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6055128367223103756}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a2a5c01aecdb242af717e42d066431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 5
+  horizontalMoveDistance: 5
+  verticalMoveDistance: 5
   moveDuration: 0.3
   boundsOrigin: {fileID: 1238716936631112221, guid: 38573608e43955d4b9d2705b5febf337, type: 3}
   boundsSize: {x: 20, y: 0, z: 20}

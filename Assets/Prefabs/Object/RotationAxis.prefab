@@ -105,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotatingManager: {fileID: 4250345493248960212}
   colorChanger: {fileID: 3547941803396635732}
+  selecterTag: ButtonSelecter
 --- !u!114 &3547941803396635732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +121,7 @@ MonoBehaviour:
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverAndClickColor: {r: 0, g: 1, b: 0.12549019, a: 1}
   colorChangeDuration: 0.3
+  targetTag: ButtonSelecter
   isClicked: 0
 --- !u!114 &1683480176511869666
 MonoBehaviour:
@@ -283,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotatingManager: {fileID: 4250345493248960212}
   colorChanger: {fileID: 1427040279999471512}
+  selecterTag: ButtonSelecter
 --- !u!114 &1427040279999471512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +301,7 @@ MonoBehaviour:
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverAndClickColor: {r: 0, g: 1, b: 0.12549019, a: 1}
   colorChangeDuration: 0.3
+  targetTag: ButtonSelecter
   isClicked: 0
 --- !u!114 &5790789292583691859
 MonoBehaviour:

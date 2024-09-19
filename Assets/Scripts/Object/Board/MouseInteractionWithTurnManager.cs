@@ -1,4 +1,3 @@
-
 using DG.Tweening;
 using UnityEngine;
 
@@ -19,49 +18,55 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        colorChanger.ChangeHoverColor(GlobalColorManager.Instance.currentColor);
+        if (colorChanger.isClicked) return;
+        if (colorChanger.hoverAndClickColor != GlobalColorManager.Instance.currentColor)
+        {
+            colorChanger.ChangeHoverColor(GlobalColorManager.Instance.currentColor);
+        }
     }
 
     private void UpdateColorBasedOnTurn()
     {
         GlobalColorManager.Instance.UpdateColorBasedOnTurn();
-        colorChanger.ChangeHoverColor(GlobalColorManager.Instance.currentColor);
     }
 
-    public static bool IsInteractionBlocked()
+    public bool IsInteractionBlocked()
     {
-        var turnManager = GameTurnManager.Instance;
         var stateManager = GameStateManager.Instance;
-        return CanvasBounce.isBlocked ||
-               turnManager.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup) ||
-               turnManager.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup) ||
+        return colorChanger.isClicked ||
                TimeControllerToggle.isTimeStopped ||
                (!stateManager.IsBoardSetupComplete && !stateManager.IsRotating);
     }
 
-    private void OnMouseDown()
+    private void OnTriggerStay(Collider other)
     {
-        if (IsInteractionBlocked() || colorChanger.isClicked)
+        if (!other.CompareTag("MassSelecter")) return;
+
+        // SwitchControllerのAボタンが押されたかどうかを検知
+        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) &&
+            Input.GetKeyDown((KeyCode)SwitchController.R))
         {
-            //ScenesAudio.BlockSe();
-            return;
+            HandleInteraction();
         }
 
+        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerPlacePiece) &&
+    Input.GetKeyDown((KeyCode)SwitchController.L))
+        {
+            HandleInteraction();
+        }
+    }
+
+    private void HandleInteraction()
+    {
+        if (IsInteractionBlocked() || colorChanger.isClicked) return;
+
         ScenesAudio.ClickSe();
-        colorChanger.OnMouseDown();
+        // Aボタンが押された際にクリック処理を呼び出す
+        colorChanger.HandleClick();
         GameTurnManager.Instance.SetTurnChange(true);
         GameTurnManager.Instance.AdvanceTurn(); // ターンを進める
         UpdateColorBasedOnTurn(); // 色を更新
-        //Debug.Log("Current color: " + colorChanger.GetComponent<Renderer>().material.color);
+        ObjectStateManager.Instance.MoveFirstObjectUpDown(false);
+        ObjectStateManager.Instance.MoveSecondObjectUpDown(true);
     }
 }
-
-
-
-
-
-
-
-
-
-

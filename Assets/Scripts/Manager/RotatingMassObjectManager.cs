@@ -112,7 +112,7 @@ public class RotatingMassObjectManager : MonoBehaviour
                 placeholder.transform.SetParent(transform);
                 massPlaceholders[(MassPoint)i] = placeholder;
 
-                mass[i].GetComponent<ObjectScaler>().IgnoreMouseInput();
+                //mass[i].GetComponent<ObjectScaler>().IgnoreMouseInput();
             }
         }
     }
@@ -124,7 +124,7 @@ public class RotatingMassObjectManager : MonoBehaviour
             if (obj != null)
             {
                 obj.transform.SetParent(null);
-                obj.GetComponent<ObjectScaler>().ResumeMouseInput();
+                //obj.GetComponent<ObjectScaler>().ResumeMouseInput();
             }
         }
 
@@ -144,6 +144,8 @@ public class RotatingMassObjectManager : MonoBehaviour
         GameTurnManager.Instance.SetTurnChange(true);
         GameTurnManager.Instance.AdvanceTurn(); // É^Å[ÉìÇêiÇﬂÇÈ
         ScenesAudio.SetSe();
+        ObjectStateManager.Instance.MoveFirstObjectUpDown(true);
+        ObjectStateManager.Instance.MoveSecondObjectUpDown(false);
     }
 }
 

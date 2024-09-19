@@ -10,6 +10,7 @@ public class GridObjectGenerator : MonoBehaviour
     [SerializeField] private float spacing = 1.0f; // 格子点の間隔
     [SerializeField] private Transform gridReferenceTransform; // 格子点の基準となるTransform
     [SerializeField] private float spawnInterval = 2f; // n秒ごとの間隔
+
     private bool onGenerate = false;
     private List<GameObject> generatedObjects = new List<GameObject>(); // 生成されたオブジェクトを保持
 
@@ -17,6 +18,7 @@ public class GridObjectGenerator : MonoBehaviour
     {
         GenerateGrid();
     }
+
     private void Update()
     {
         if (GameTurnManager.Instance.IsGameStarted && !onGenerate)
@@ -66,7 +68,6 @@ public class GridObjectGenerator : MonoBehaviour
                 {
                     Debug.LogWarning($"Prefab at index {prefabIndex} is not assigned.");
                 }
-
                 // インデックスを更新（要素数が `objectPrefabs.Length` でリセット）
                 prefabIndex = (prefabIndex + 1) % objectPrefabs.Length;
             }

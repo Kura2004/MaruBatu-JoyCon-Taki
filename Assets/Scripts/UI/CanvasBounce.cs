@@ -53,7 +53,7 @@ public class CanvasBounce : MonoBehaviour
         }
 
         // バウンドが完了している場合、かつ Q キーが押されたときにキャンバスを上昇させる
-        if (Input.GetKeyDown(KeyCode.Q) && !isFalling && isBouncingComplete)
+        if (Input.GetKeyDown((KeyCode)SwitchController.ZL) && !isFalling && isBouncingComplete)
         {
             RiseCanvas();
 
@@ -63,7 +63,6 @@ public class CanvasBounce : MonoBehaviour
                 GameStateManager.Instance.StartBoardSetup(1.6f);
                 TimeLimitController.Instance.ResetTimer();
                 TimeLimitController.Instance.StopTimer();
-                dropOnStart = false;
             }
 
             Debug.Log("キャンバスが上昇します");
@@ -72,7 +71,7 @@ public class CanvasBounce : MonoBehaviour
 
     protected virtual bool ShouldDropCanvas()
     {
-        return Input.GetKeyDown(KeyCode.Q) && !isFalling && canvasRectTransform.anchoredPosition.y != groundY;
+        return Input.GetKeyDown((KeyCode)SwitchController.ZL) && !isFalling && canvasRectTransform.anchoredPosition.y != groundY;
     }
 
     protected void InitializeDrop()
@@ -137,8 +136,11 @@ public class CanvasBounce : MonoBehaviour
             // 上昇アニメーション
             canvasRectTransform.DOAnchorPosY(initialDropHeight, riseDuration).SetEase(Ease.OutQuad).OnComplete(() =>
             {
+                if (dropOnStart)
+                    Destroy(this);
                 // アニメーション完了後、キャンバスを非アクティブに設定
                 canvasObject.SetActive(false);
+
             });
         }
         isBlocked = false;

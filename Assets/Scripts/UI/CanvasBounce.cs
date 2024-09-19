@@ -63,7 +63,6 @@ public class CanvasBounce : MonoBehaviour
                 GameStateManager.Instance.StartBoardSetup(1.6f);
                 TimeLimitController.Instance.ResetTimer();
                 TimeLimitController.Instance.StopTimer();
-                dropOnStart = false;
             }
 
             Debug.Log("キャンバスが上昇します");
@@ -137,8 +136,11 @@ public class CanvasBounce : MonoBehaviour
             // 上昇アニメーション
             canvasRectTransform.DOAnchorPosY(initialDropHeight, riseDuration).SetEase(Ease.OutQuad).OnComplete(() =>
             {
+                if (dropOnStart)
+                    Destroy(this);
                 // アニメーション完了後、キャンバスを非アクティブに設定
                 canvasObject.SetActive(false);
+
             });
         }
         isBlocked = false;

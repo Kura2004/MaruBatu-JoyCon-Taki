@@ -14,11 +14,9 @@ public class RotatingButtonRight : MonoBehaviour
 
     private bool IsInteractionBlocked()
     {
-        var turnManager = GameTurnManager.Instance;
         return CanvasBounce.isBlocked ||
-               turnManager.IsCurrentTurn(GameTurnManager.TurnState.PlayerPlacePiece) ||
-               turnManager.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) ||
-               TimeControllerToggle.isTimeStopped || !GameStateManager.Instance.IsBoardSetupComplete;
+               TimeControllerToggle.isTimeStopped || 
+               !GameStateManager.Instance.IsBoardSetupComplete;
     }
 
     private void Start()
@@ -44,7 +42,6 @@ public class RotatingButtonRight : MonoBehaviour
         }
 
         if (other.CompareTag(selecterTag) &&
-    GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup) &&
     Input.GetKeyDown((KeyCode)SwitchController.L))
         {
             HandleClickInteraction();

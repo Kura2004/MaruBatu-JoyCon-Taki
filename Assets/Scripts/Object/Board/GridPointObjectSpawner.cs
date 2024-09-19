@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class GridPointObjectSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject objectToSpawn; // 生成するオブジェクト
+    /*[SerializeField] private GameObject objectToSpawn; // 生成するオブジェクト
     [SerializeField] private string generatorTag = "DefaultTag"; // 生成器のタグ
     [SerializeField] private int indexToUse = 0; // 使用する位置のインデクス
     [SerializeField] private Vector3 offset;
@@ -61,5 +61,5 @@ public class GridPointObjectSpawner : MonoBehaviour
                 Debug.LogWarning($"Index {indexToUse} is out of range for generator with tag '{generatorTag}'.");
             }
         }
-    }
+    }*/
 }

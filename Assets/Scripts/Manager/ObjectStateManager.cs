@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening; // DOTweenを使うための名前空間
 
 public class ObjectStateManager : SingletonMonoBehaviour<ObjectStateManager>
 {
@@ -10,6 +11,10 @@ public class ObjectStateManager : SingletonMonoBehaviour<ObjectStateManager>
 
     [SerializeField]
     private float delayBeforeFinding = 1f; // タグでオブジェクトを探す前の遅延時間（秒）
+
+    [Header("上下運動の設定")]
+    [SerializeField] private float moveDuration = 2f;  // 移動にかかる時間
+    [SerializeField] private float moveDistance = 2f;  // 移動する範囲の距離
 
     private GameObject firstObject; // 1つ目のオブジェクト
     private GameObject secondObject; // 2つ目のオブジェクト
@@ -26,27 +31,23 @@ public class ObjectStateManager : SingletonMonoBehaviour<ObjectStateManager>
         firstObject = GameObject.FindGameObjectWithTag(firstObjectTag);
         secondObject = GameObject.FindGameObjectWithTag(secondObjectTag);
 
-        // オブジェクトが見つからなかった場合のログ
-        if (firstObject == null)
+        if (secondObject != null)
         {
-            Debug.LogWarning($"タグ '{firstObjectTag}' のオブジェクトが見つかりませんでした。");
+            secondObject.SetActive(false); // 最初に2つ目のオブジェクトを非アクティブに設定
         }
-
-        if (secondObject == null)
-        {
-            Debug.LogWarning($"タグ '{secondObjectTag}' のオブジェクトが見つかりませんでした。");
-        }
-        secondObject.SetActive(false);
     }
 
     /// <summary>
-    /// 1つ目のオブジェクトをアクティブにする
+    /// 1つ目のオブジェクトを現在の位置から指定範囲で上下運動させる
     /// </summary>
-    public void SetFirstObjectActive(bool isActive)
+    public void MoveFirstObjectUpDown(bool isActive)
     {
         if (firstObject != null)
         {
-            firstObject.SetActive(isActive);
+            // 現在の位置を基準に上下運動をする
+            firstObject.transform.DOMoveY(firstObject.transform.position.y + moveDistance, moveDuration)
+                .SetLoops(2, LoopType.Yoyo) // 1回上がって戻る動きを設定
+                .OnComplete(() => SetFirstObjectActive(isActive)); // 元の位置に戻ったらアクティブ状態を切り替える
         }
         else
         {
@@ -55,13 +56,16 @@ public class ObjectStateManager : SingletonMonoBehaviour<ObjectStateManager>
     }
 
     /// <summary>
-    /// 2つ目のオブジェクトをアクティブにする
+    /// 2つ目のオブジェクトを現在の位置から指定範囲で上下運動させる
     /// </summary>
-    public void SetSecondObjectActive(bool isActive)
+    public void MoveSecondObjectUpDown(bool isActive)
     {
         if (secondObject != null)
         {
-            secondObject.SetActive(isActive);
+            // 現在の位置を基準に上下運動をする
+            secondObject.transform.DOMoveY(secondObject.transform.position.y + moveDistance, moveDuration)
+                .SetLoops(2, LoopType.Yoyo) // 1回上がって戻る動きを設定
+                .OnComplete(() => SetSecondObjectActive(isActive)); // 元の位置に戻ったらアクティブ状態を切り替える
         }
         else
         {
@@ -76,5 +80,29 @@ public class ObjectStateManager : SingletonMonoBehaviour<ObjectStateManager>
     {
         SetFirstObjectActive(isFirstActive);
         SetSecondObjectActive(isSecondActive);
+    }
+
+    private void SetFirstObjectActive(bool isActive)
+    {
+        if (firstObject != null)
+        {
+            firstObject.SetActive(isActive);
+        }
+        else
+        {
+            Debug.LogWarning("FirstObjectが設定されていません。");
+        }
+    }
+
+    private void SetSecondObjectActive(bool isActive)
+    {
+        if (secondObject != null)
+        {
+            secondObject.SetActive(isActive);
+        }
+        else
+        {
+            Debug.LogWarning("SecondObjectが設定されていません。");
+        }
     }
 }

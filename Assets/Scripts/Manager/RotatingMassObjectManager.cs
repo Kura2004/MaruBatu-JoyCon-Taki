@@ -144,8 +144,8 @@ public class RotatingMassObjectManager : MonoBehaviour
         GameTurnManager.Instance.SetTurnChange(true);
         GameTurnManager.Instance.AdvanceTurn(); // ƒ^[ƒ“‚ği‚ß‚é
         ScenesAudio.SetSe();
-        ObjectStateManager.Instance.SetFirstObjectActive(true);
-        ObjectStateManager.Instance.SetSecondObjectActive(false);
+        ObjectStateManager.Instance.MoveFirstObjectUpDown(true);
+        ObjectStateManager.Instance.MoveSecondObjectUpDown(false);
     }
 }
 

@@ -15,9 +15,6 @@ public class GridObjectGenerator : MonoBehaviour
     private bool onGenerate = false;
     private List<GameObject> generatedObjects = new List<GameObject>(); // 生成されたオブジェクトを保持
 
-    // 生成位置のTransformを保存するリスト
-    public List<Transform> GeneratedPositions { get; private set; } = new List<Transform>();
-
     private void Start()
     {
         GenerateGrid();
@@ -71,7 +68,6 @@ public class GridObjectGenerator : MonoBehaviour
                     // 生成位置のTransformを保存
                     Transform positionTransform = new GameObject($"Position_{row}_{column}").transform;
                     positionTransform.position = position;
-                    GeneratedPositions.Add(positionTransform);
                 }
                 else
                 {

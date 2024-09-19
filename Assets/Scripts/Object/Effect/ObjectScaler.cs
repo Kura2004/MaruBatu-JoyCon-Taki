@@ -19,7 +19,7 @@ public class ObjectScaler : MonoBehaviour
     private Vector3 enlargedScale; // 拡大後のスケール
 
     // タグを持つオブジェクトが触れているかのフラグ
-    public bool isTouchingTarget = false;
+    private bool isTouchingTarget = false;
 
     private Tween scaleTween; // 現在のスケールアニメーション用Tween
 
@@ -38,6 +38,8 @@ public class ObjectScaler : MonoBehaviour
     // タグを持つオブジェクトが触れたときに呼ばれるメソッド
     private void OnTriggerEnter(Collider other)
     {
+        if ((GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup) ||
+            GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup))) return;
         if (other.CompareTag(targetTag) && CanProcessInput())
         {
             isTouchingTarget = true;
@@ -56,7 +58,7 @@ public class ObjectScaler : MonoBehaviour
     }
 
     // タグを持つオブジェクトが触れている場合にのみ処理を実行するメソッド
-    private void Update()
+    private void LateUpdate()
     {
         //if (TimeControllerToggle.isTimeStopped || GameStateManager.Instance.IsRotating)
         //{
@@ -71,11 +73,6 @@ public class ObjectScaler : MonoBehaviour
         //{
         //    ResetObjectSize();
         //}
-
-        if (GameTurnManager.Instance.IsTurnChanging)
-        {
-            ResetObjectSize();
-        }
     }
 
     // オブジェクトのサイズを大きくするメソッド
@@ -91,12 +88,12 @@ public class ObjectScaler : MonoBehaviour
     }
 
     // オブジェクトのサイズを徐々に元に戻すメソッド
-    public void ResetObjectSize()
+    private void ResetObjectSize()
     {
         // 現在のアニメーションを停止
         if (scaleTween != null && scaleTween.IsPlaying())
         {
-            return;
+            scaleTween.Kill();
         }
 
         scaleTween = targetObject.DOScale(originalScale, scaleDuration).SetEase(Ease.InOutQuad);

@@ -38,8 +38,10 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
                (!stateManager.IsBoardSetupComplete && !stateManager.IsRotating);
     }
 
-    private void Update()
+    private void OnTriggerStay(Collider other)
     {
+        if (!other.CompareTag("MassSelecter")) return;
+
         // SwitchControllerのAボタンが押されたかどうかを検知
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) &&
             Input.GetKeyDown((KeyCode)SwitchController.R))
@@ -56,20 +58,15 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
 
     private void HandleInteraction()
     {
-        if (IsInteractionBlocked() || colorChanger.isClicked)
-        {
-            //ScenesAudio.BlockSe();
-            return;
-        }
+        if (IsInteractionBlocked() || colorChanger.isClicked) return;
 
         ScenesAudio.ClickSe();
         // Aボタンが押された際にクリック処理を呼び出す
-        //colorChanger.HandleClick();
+        colorChanger.HandleClick();
         GameTurnManager.Instance.SetTurnChange(true);
         GameTurnManager.Instance.AdvanceTurn(); // ターンを進める
         UpdateColorBasedOnTurn(); // 色を更新
-        ObjectStateManager.Instance.SetFirstObjectActive(false);
-        ObjectStateManager.Instance.SetSecondObjectActive(true);
-        ObjectScaler obj = GetComponent<ObjectScaler>();
+        ObjectStateManager.Instance.MoveFirstObjectUpDown(false);
+        ObjectStateManager.Instance.MoveSecondObjectUpDown(true);
     }
 }

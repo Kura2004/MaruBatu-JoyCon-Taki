@@ -22,9 +22,5 @@ public class ObjectColorChangerWithReset : ObjectColorChanger
     //    }
     //    base.OnMouseOver();
     //}
-
-    protected override void OnTriggerStay(Collider other)
-    {
-    }
 }
 

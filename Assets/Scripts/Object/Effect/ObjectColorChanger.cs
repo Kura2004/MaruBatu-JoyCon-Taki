@@ -17,7 +17,7 @@ public class ObjectColorChanger : MonoBehaviour
 
     private Renderer objectRenderer; // オブジェクトのRenderer
     private Tween colorTween; // 色の補完用のTween
-    public bool isClicked { get; private set; } = false; // クリック状態を保持するフラグ
+    public bool isClicked  = false; // クリック状態を保持するフラグ
 
     protected virtual void Start()
     {
@@ -43,23 +43,6 @@ public class ObjectColorChanger : MonoBehaviour
         {
             // タグを持つオブジェクトが離れたときに色を元に戻す
             colorTween = objectRenderer.material.DOColor(originalColor, colorChangeDuration);
-        }
-    }
-
-    protected virtual void OnTriggerStay(Collider other)
-    {
-        if (isClicked || !other.CompareTag(targetTag)) return;
-
-        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup)
-            && Input.GetKeyDown((KeyCode)SwitchController.L))
-        {
-            HandleClick();
-        }
-
-        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece)
-&& Input.GetKeyDown((KeyCode)SwitchController.R))
-        {
-            HandleClick();
         }
     }
 

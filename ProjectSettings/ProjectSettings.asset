@@ -159,7 +159,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Standalone: com.Takitaki.El-Samaria
+    Standalone: com.Takitaki.Marubatu
   buildNumber:
     Bratwurst: 0
     Standalone: 0

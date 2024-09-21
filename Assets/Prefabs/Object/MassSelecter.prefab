@@ -150,6 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMoveDistance: 5
   verticalMoveDistance: 5
-  moveDuration: 0.3
+  moveDuration: 0.5
   boundsOrigin: {fileID: 1238716936631112221, guid: 38573608e43955d4b9d2705b5febf337, type: 3}
   boundsSize: {x: 20, y: 0, z: 20}

@@ -53,7 +53,7 @@ public class CanvasBounce : MonoBehaviour
         }
 
         // バウンドが完了している場合、かつ Q キーが押されたときにキャンバスを上昇させる
-        if (Input.GetButtonDown("A_Button") && !isFalling && isBouncingComplete)
+        if (Input.GetButtonDown("1P_Decision") && !isFalling && isBouncingComplete)
         {
             RiseCanvas();
 

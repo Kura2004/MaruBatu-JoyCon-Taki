@@ -16,8 +16,10 @@ public class RotatingButtonLeft : MonoBehaviour
     private bool IsInteractionBlocked()
     {
         return CanvasBounce.isBlocked ||
-               TimeControllerToggle.isTimeStopped 
-               || !GameStateManager.Instance.IsBoardSetupComplete;
+               TimeControllerToggle.isTimeStopped ||
+               !GameStateManager.Instance.IsBoardSetupComplete ||
+               !rotatingManager.AnyMassClicked() ||
+               !rotatingManager.isSelected;
 
     }
 
@@ -31,21 +33,25 @@ public class RotatingButtonLeft : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (IsInteractionBlocked() || !rotatingManager.AnyMassClicked())
+        if (IsInteractionBlocked() || !other.CompareTag(selecterTag))
         {
             return;
         }
 
-        if (other.CompareTag(selecterTag) &&
-            GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup) &&
+        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup) &&
             Input.GetButtonDown("2P_L1"))
         {
             HandleClickInteraction();
         }
 
-        if (other.CompareTag(selecterTag) &&
-    GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup) &&
-    Input.GetButtonDown("1P_L1"))
+        if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup) &&
+            Input.GetButtonDown("1P_L1"))
+        {
+            HandleClickInteraction();
+        }
+
+        //テスト用
+        if (Input.GetKeyDown(KeyCode.X))
         {
             HandleClickInteraction();
         }

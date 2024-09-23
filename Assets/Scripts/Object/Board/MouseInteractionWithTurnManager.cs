@@ -35,7 +35,7 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
         var stateManager = GameStateManager.Instance;
         return colorChanger.isClicked ||
                TimeControllerToggle.isTimeStopped ||
-               (!stateManager.IsBoardSetupComplete && !stateManager.IsRotating);
+               !stateManager.IsBoardSetupComplete || stateManager.IsRotating;
     }
 
     private void OnTriggerStay(Collider other)
@@ -54,11 +54,17 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
         {
             HandleInteraction();
         }
+
+        //テスト用
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            HandleInteraction();
+        }
     }
 
     private void HandleInteraction()
     {
-        if (IsInteractionBlocked() || colorChanger.isClicked) return;
+        if (IsInteractionBlocked()) return;
 
         ScenesAudio.ClickSe();
         // Aボタンが押された際にクリック処理を呼び出す

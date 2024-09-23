@@ -26,13 +26,13 @@ public class KeyInputMover : MonoBehaviour
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) ||
             GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup))
         {
-            Handle1PInput();
+            Handle2PInput();
         }
 
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerPlacePiece) ||
             GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup))
         {
-            Handle2PInput();
+            Handle1PInput();
         }
     }
 
@@ -41,8 +41,8 @@ public class KeyInputMover : MonoBehaviour
     private void Handle1PInput()
     {
         // Input.GetAxis‚Å‰¡²‚Æc²‚Ì“ü—Í‚ğæ“¾
-        float horizontalInput = Input.GetAxis("2P_Select_X");
-        float verticalInput = Input.GetAxis("2P_Select_Y");
+        float horizontalInput = Input.GetAxis("1P_Select_X");
+        float verticalInput = Input.GetAxis("1P_Select_Y");
 
 #if UNITY_EDITOR
         if (onDebug) {
@@ -72,8 +72,8 @@ public class KeyInputMover : MonoBehaviour
     private void Handle2PInput()
     {
         // Input.GetAxis‚Å‰¡²‚Æc²‚Ì“ü—Í‚ğæ“¾
-        float horizontalInput = Input.GetAxis("1P_Select_X");
-        float verticalInput = Input.GetAxis("1P_Select_Y");
+        float horizontalInput = Input.GetAxis("2P_Select_X");
+        float verticalInput = Input.GetAxis("2P_Select_Y");
 
 #if UNITY_EDITOR
         if (onDebug)
@@ -83,8 +83,17 @@ public class KeyInputMover : MonoBehaviour
         }
 #endif
 
-        // —¼•û‚Ì“ü—Í‚ª0‚È‚çˆ—‚µ‚È‚¢
-        if (horizontalInput == 0 && verticalInput == 0) return;
+        if (Mathf.Abs(horizontalInput) < 0.1f)
+        {
+            horizontalInput = 0;
+        }
+
+        if (Mathf.Abs(verticalInput) < 0.1f)
+        {
+            verticalInput = 0;
+        }
+
+        if(horizontalInput == 0 && verticalInput == 0) { return; }
 
         // ‰¡•ûŒü‚Æc•ûŒü‚Ì“ü—Í‚Ìâ‘Î’l‚ğ”äŠr
         if (Mathf.Abs(horizontalInput) > Mathf.Abs(verticalInput))
@@ -97,6 +106,7 @@ public class KeyInputMover : MonoBehaviour
         {
             // c•ûŒü‚ÌˆÚ“®‚ª—Dæ‚³‚ê‚é
             Vector3 moveDirection = (verticalInput > 0) ? Vector3.forward * verticalMoveDistance : Vector3.back * verticalMoveDistance;
+            Debug.Log("c•ûŒü" +  verticalInput);
             TryMoveInDirection(moveDirection);
         }
     }

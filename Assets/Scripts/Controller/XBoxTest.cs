@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class XBoxTest : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -37,19 +31,19 @@ public class XBoxTest : MonoBehaviour
         {
             Debug.Log("1P_R1");
         }
-        if(Input.GetAxis("1P_Select_X") != 0)
+        if(Mathf.Abs(Input.GetAxis("1P_Select_X")) > 0.01f)
         {
             Debug.Log("1Pç∂âE");
         }
-        if(Input.GetAxis("1P_Select_Y") != 0)
+        if(Mathf.Abs(Input.GetAxis("1P_Select_Y")) > 0.01f)
         {
             Debug.Log("1Pè„â∫");
         }
-        if(Input.GetAxis("2P_Select_X") != 0)
+        if(Mathf.Abs(Input.GetAxis("2P_Select_X")) > 0.01f)
         {
             Debug.Log("2Pç∂âE");
         }
-        if(Input.GetAxis("2P_Select_Y") != 0)
+        if(Mathf.Abs(Input.GetAxis("2P_Select_Y")) > 0.01f)
         {
             Debug.Log("2Pè„â∫");
         }

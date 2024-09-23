@@ -70,9 +70,10 @@ public class CanvasBounce : MonoBehaviour
         }
 
         //ここを変えて欲しい
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetButtonDown("1P_Back"))
         {
             ScenesLoader.Instance.LoadStartMenu();
+            Debug.Log("スタート画面に戻ります");
         }
     }
 

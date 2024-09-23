@@ -38,10 +38,10 @@ public class TimeLimitAdjuster : MonoBehaviour
 
         // Input.GetAxis("Vertical") の値に応じて十の位を変更
         //ここを変更
-        float verticalInput = Input.GetAxis("Vertical");
+        float verticalInput = Input.GetAxis("1P_Select_Y");
 
         // 縦軸の入力が0以外のときのみ処理
-        if (verticalInput != 0 && canAdjustTime)
+        if (Mathf.Abs(verticalInput) > 0.01f && canAdjustTime)
         {
             if (verticalInput > 0)
             {

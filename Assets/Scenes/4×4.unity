@@ -5295,7 +5295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542824590511981454, guid: 85bb8ae4fb8530d4f852b09fb945a17a, type: 3}
       propertyPath: onDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5542824590511981454, guid: 85bb8ae4fb8530d4f852b09fb945a17a, type: 3}
       propertyPath: boundsSize.x
@@ -6946,7 +6946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7166466448950357776, guid: 7a9e53d2f63427c459ea3b7717315647, type: 3}
       propertyPath: onDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

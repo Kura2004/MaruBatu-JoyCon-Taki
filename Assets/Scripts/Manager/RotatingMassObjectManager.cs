@@ -39,6 +39,24 @@ public class RotatingMassObjectManager : MonoBehaviour
         return false; // 全てのオブジェクトがクリックされていない場合
     }
 
+    public bool isSelected = false;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ButtonSelecter"))
+        {
+            isSelected = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("ButtonSelecter"))
+        {
+            isSelected = false;
+        }
+    }
+
     public void OnTriggerStay(Collider other)
     {
         // TagがMassのオブジェクトに当たっている場合
@@ -148,4 +166,3 @@ public class RotatingMassObjectManager : MonoBehaviour
         ObjectStateManager.Instance.MoveSecondObjectUpDown(false);
     }
 }
-

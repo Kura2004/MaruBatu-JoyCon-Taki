@@ -21,7 +21,7 @@ public class KeyInputMover : MonoBehaviour
 
     void Update()
     {
-        if (isMoving) return; // ˆÚ“®’†‚Í“ü—Í‚ğ–³‹
+        if (isMoving || !GameStateManager.Instance.IsBoardSetupComplete) return; // ˆÚ“®’†‚Í“ü—Í‚ğ–³‹
 
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) ||
             GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup))
@@ -36,12 +36,20 @@ public class KeyInputMover : MonoBehaviour
         }
     }
 
+    [SerializeField] bool onDebug = false;
     // Input.GetAxis‚ğg—p‚µ‚ÄˆÚ“®ˆ—
     private void Handle1PInput()
     {
         // Input.GetAxis‚Å‰¡²‚Æc²‚Ì“ü—Í‚ğæ“¾
         float horizontalInput = Input.GetAxis("2P_Select_X");
         float verticalInput = Input.GetAxis("2P_Select_Y");
+
+#if UNITY_EDITOR
+        if (onDebug) {
+            horizontalInput = Input.GetAxis("Horizontal");
+            verticalInput = Input.GetAxis("Vertical");
+        }
+#endif
 
         // —¼•û‚Ì“ü—Í‚ª0‚È‚çˆ—‚µ‚È‚¢
         if (horizontalInput == 0 && verticalInput == 0) return;
@@ -66,6 +74,14 @@ public class KeyInputMover : MonoBehaviour
         // Input.GetAxis‚Å‰¡²‚Æc²‚Ì“ü—Í‚ğæ“¾
         float horizontalInput = Input.GetAxis("1P_Select_X");
         float verticalInput = Input.GetAxis("1P_Select_Y");
+
+#if UNITY_EDITOR
+        if (onDebug)
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+            verticalInput = Input.GetAxis("Vertical");
+        }
+#endif
 
         // —¼•û‚Ì“ü—Í‚ª0‚È‚çˆ—‚µ‚È‚¢
         if (horizontalInput == 0 && verticalInput == 0) return;

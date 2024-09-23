@@ -36,13 +36,13 @@ public class RotatingButtonRight : MonoBehaviour
 
         if (other.CompareTag(selecterTag) &&
             GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup) &&
-            Input.GetButtonDown("R1_Button"))
+            Input.GetButtonDown("2P_R1"))
         {
             HandleClickInteraction();
         }
 
         if (other.CompareTag(selecterTag) &&
-    Input.GetButtonDown("R1_Button"))
+    Input.GetButtonDown("1P_R1"))
         {
             HandleClickInteraction();
         }

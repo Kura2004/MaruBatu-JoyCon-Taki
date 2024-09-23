@@ -44,13 +44,13 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
 
         // SwitchController‚ÌAƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©‚Ç‚¤‚©‚ðŒŸ’m
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) &&
-            Input.GetButtonDown("A_Button"))
+            Input.GetButtonDown("2P_Decision"))
         {
             HandleInteraction();
         }
 
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerPlacePiece) &&
-    Input.GetButtonDown("A_Button"))
+    Input.GetButtonDown("1P_Decision"))
         {
             HandleInteraction();
         }

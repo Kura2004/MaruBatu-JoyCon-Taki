@@ -13,45 +13,53 @@ public class XBoxTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("A_Button"))
+        if(Input.GetButtonDown("1P_Decision"))
         {
-            Debug.Log("Aボタン");
+            Debug.Log("1P_Aボタン");
         }
-        if(Input.GetButtonDown("B_Button"))
+        if(Input.GetButtonDown("1P_Back"))
         {
-            Debug.Log("Bボタン");
+            Debug.Log("1P_Bボタン");
         }
-        if(Input.GetButtonDown("Y_Button"))
+        if(Input.GetButtonDown("2P_Decision"))
         {
-            Debug.Log("Yボタン");
+            Debug.Log("2P_Aボタン");
         }
-        if(Input.GetButtonDown("X_Button"))
+        if(Input.GetButtonDown("2P_Back"))
         {
-            Debug.Log("Xボタン");
+            Debug.Log("2P_Bボタン");
         }
-        if(Input.GetButtonDown("L1_Button"))
+        if(Input.GetButtonDown("1P_L1"))
         {
-            Debug.Log("L1");
+            Debug.Log("1P_L1");
         }
-        if(Input.GetButtonDown("R1_Button"))
+        if(Input.GetButtonDown("1P_R1"))
         {
-            Debug.Log("R1");
+            Debug.Log("1P_R1");
         }
-        if(Input.GetAxis("L_Stick1") != 0)
+        if(Input.GetAxis("1P_Select_X") != 0)
         {
-            Debug.Log("左スティック左右");
+            Debug.Log("1P左右");
         }
-        if(Input.GetAxis("L_Stick2") != 0)
+        if(Input.GetAxis("1P_Select_Y") != 0)
         {
-            Debug.Log("左スティック上下");
+            Debug.Log("1P上下");
         }
-        if(Input.GetAxis("R_Stick1") != 0)
+        if(Input.GetAxis("2P_Select_X") != 0)
         {
-            Debug.Log("右スティック左右");
+            Debug.Log("2P左右");
         }
-        if(Input.GetAxis("R_Stick2") != 0)
+        if(Input.GetAxis("2P_Select_Y") != 0)
         {
-            Debug.Log("右スティック上下");
+            Debug.Log("2P上下");
+        }
+        if(Input.GetButtonDown("2P_L1"))
+        {
+            Debug.Log("2P_L1");
+        }
+        if(Input.GetButtonDown("2P_R1"))
+        {
+            Debug.Log("2P_R1");
         }
     }
 }

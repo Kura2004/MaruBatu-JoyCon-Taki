@@ -40,8 +40,8 @@ public class KeyInputMover : MonoBehaviour
     private void Handle1PInput()
     {
         // Input.GetAxis‚Å‰¡²‚Æc²‚Ì“ü—Í‚ğæ“¾
-        float horizontalInput = Input.GetAxis("L_Stick1");
-        float verticalInput = Input.GetAxis("L_Stick2");
+        float horizontalInput = Input.GetAxis("2P_Select_X");
+        float verticalInput = Input.GetAxis("2P_Select_Y");
 
         // —¼•û‚Ì“ü—Í‚ª0‚È‚çˆ—‚µ‚È‚¢
         if (horizontalInput == 0 && verticalInput == 0) return;
@@ -64,8 +64,8 @@ public class KeyInputMover : MonoBehaviour
     private void Handle2PInput()
     {
         // Input.GetAxis‚Å‰¡²‚Æc²‚Ì“ü—Í‚ğæ“¾
-        float horizontalInput = Input.GetAxis("L_Stick1");
-        float verticalInput = Input.GetAxis("L_Stick2");
+        float horizontalInput = Input.GetAxis("1P_Select_X");
+        float verticalInput = Input.GetAxis("1P_Select_Y");
 
         // —¼•û‚Ì“ü—Í‚ª0‚È‚çˆ—‚µ‚È‚¢
         if (horizontalInput == 0 && verticalInput == 0) return;

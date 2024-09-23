@@ -38,14 +38,14 @@ public class RotatingButtonLeft : MonoBehaviour
 
         if (other.CompareTag(selecterTag) &&
             GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup) &&
-            Input.GetButtonDown("L1_Button"))
+            Input.GetButtonDown("2P_L1"))
         {
             HandleClickInteraction();
         }
 
         if (other.CompareTag(selecterTag) &&
     GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup) &&
-    Input.GetButtonDown("L1_Button"))
+    Input.GetButtonDown("1P_L1"))
         {
             HandleClickInteraction();
         }

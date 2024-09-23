@@ -51,7 +51,16 @@ public class KeyInputMover : MonoBehaviour
         }
 #endif
 
-        // —¼•û‚Ì“ü—Í‚ª0‚È‚çˆ—‚µ‚È‚¢
+        if (Mathf.Abs(horizontalInput) < 0.1f)
+        {
+            horizontalInput = 0;
+        }
+
+        if (Mathf.Abs(verticalInput) < 0.1f)
+        {
+            verticalInput = 0;
+        }
+
         if (horizontalInput == 0 && verticalInput == 0) return;
 
         // ‰¡•ûŒü‚Æc•ûŒü‚Ì“ü—Í‚Ìâ‘Î’l‚ğ”äŠr

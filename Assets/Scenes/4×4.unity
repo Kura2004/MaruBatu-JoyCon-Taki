@@ -8475,7 +8475,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefabs:
+  - {fileID: 4711909292114729282, guid: 7a4e6b0d8051b9245b9d5c3ca3511f80, type: 3}
+  - {fileID: 4711909292114729282, guid: 60c99b09873be0d43b0332104a5d2ddc, type: 3}
+  - {fileID: 4711909292114729282, guid: 6ccb3cea60b87bd4a8f7c1d00abf484d, type: 3}
+  - {fileID: 4711909292114729282, guid: 139b05579c598094c92690c62f749f82, type: 3}
+  - {fileID: 4711909292114729282, guid: 0a1dd4de6858d974297ab245f1525e2e, type: 3}
+  - {fileID: 4711909292114729282, guid: 3f95048d2f106624aacfd7e31f283315, type: 3}
   - {fileID: 4711909292114729282, guid: a88a30f17700e2e4d888ce173f8d1363, type: 3}
+  - {fileID: 4711909292114729282, guid: 894b511db76d1224b9d22fd40597a88f, type: 3}
+  - {fileID: 4711909292114729282, guid: edd197b0f7a8bef48bc93813abe643a1, type: 3}
   rows: 3
   columns: 3
   spacing: 5

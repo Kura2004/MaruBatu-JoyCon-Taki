@@ -602,7 +602,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 36ac41068ee752040a3fd74da5b0c249, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42890e6b262e3a848bf247e7eda1d92c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -623,7 +623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4911724511509825266}
   m_Layer: 0
-  m_Name: RotationAxis
+  m_Name: RotationAxisI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

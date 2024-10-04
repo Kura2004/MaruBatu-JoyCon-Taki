@@ -36,6 +36,7 @@ public class ButtonSelectOnController : MonoBehaviour
                     if (buttonManager.buttons[i].tag == pair.tag)
                     {
                         buttonList[pair.index] = buttonManager.buttons[i].button;
+                        break;
                     }
                 }
             }
@@ -43,7 +44,7 @@ public class ButtonSelectOnController : MonoBehaviour
 
        for(int i = 0; i < buttonList.Count; i++)
         {
-            if (buttonList[i] !=null)
+            if (buttonList[i] != null)
             {
                 originalScales[i] = buttonList[i].transform.localScale;
             }
@@ -57,9 +58,11 @@ public class ButtonSelectOnController : MonoBehaviour
     {
         if (!canInput) return;
 
-        
-
         Vector2 stickInput = new Vector2(Input.GetAxis("1P_Select_X"), Input.GetAxis("1P_Select_Y"));
+
+        Vector2 debugInput = Vector2.zero;
+        debugInput.x = Input.GetAxis("Horizontal");
+        debugInput.y = Input.GetAxis("Vertical");
 
         Debug.Log("’l‚Í : " + stickInput);
         if (buttonManager.Is_Locked)
@@ -76,13 +79,13 @@ public class ButtonSelectOnController : MonoBehaviour
 
             if (stickInput.y > 0.05f && volume.onSeVolume)
             {
-
                 volume.EnableBgmVolumeControl();
                 ScenesAudio.ClickSe();
                 StartCooldown();
                 return;
             }
-            else if(stickInput.y < -0.05f && !volume.onSeVolume)
+
+            else if (stickInput.y < -0.05f && !volume.onSeVolume)
             {
                 volume.EnableSeVolumeControl();
                 ScenesAudio.ClickSe();
@@ -97,27 +100,25 @@ public class ButtonSelectOnController : MonoBehaviour
                 else
                     volume.AddSeVolume(stickInput.x * 5.0f);
             }
-
-            
         }
 
         if (buttonManager.Is_Locked)
             return;
 
-        if (stickInput.y < -0.05f)
+        if (stickInput.y < -0.05f || debugInput.y < -0.05f)
         {
             SelectNextButton();
             StartCooldown();
             return;
         }
-        else if (stickInput.y > 0.05f)
+        else if (stickInput.y > 0.05f || debugInput.y > 0.05f)
         {
             SelectPreviousButton();
             StartCooldown();
             return;
         }
 
-        if (Input.GetButtonDown("1P_Decision"))
+        if (Input.GetButtonDown("1P_Decision") || Input.GetKeyDown(KeyCode.Return))
         {
             if (currentindex >= 0 && currentindex < buttonList.Count && buttonList[currentindex] != null)
             {

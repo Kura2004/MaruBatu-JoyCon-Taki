@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;  
@@ -67,7 +65,7 @@ public class ButtonSelectOnController : MonoBehaviour
         Debug.Log("’l‚Í : " + stickInput);
         if (buttonManager.Is_Locked)
         {
-            if (Input.GetButtonDown("1P_Back"))
+            if (Input.GetButtonDown("1P_Back") || Input.GetKeyDown(KeyCode.Return))
             {
                 if (currentindex >= 0 && currentindex < buttonList.Count && buttonList[currentindex] != null)
                 {
@@ -77,7 +75,7 @@ public class ButtonSelectOnController : MonoBehaviour
                 return;
             }
 
-            if (stickInput.y > 0.05f && volume.onSeVolume)
+            if ((stickInput.y > 0.05f || debugInput.y > 0.05f) && volume.onSeVolume)
             {
                 volume.EnableBgmVolumeControl();
                 ScenesAudio.ClickSe();
@@ -85,7 +83,7 @@ public class ButtonSelectOnController : MonoBehaviour
                 return;
             }
 
-            else if (stickInput.y < -0.05f && !volume.onSeVolume)
+            if ((stickInput.y < -0.05f || debugInput.y < -0.05f) && !volume.onSeVolume)
             {
                 volume.EnableSeVolumeControl();
                 ScenesAudio.ClickSe();
@@ -105,15 +103,16 @@ public class ButtonSelectOnController : MonoBehaviour
         if (buttonManager.Is_Locked)
             return;
 
-        if (stickInput.y < -0.05f || debugInput.y < -0.05f)
+        if (stickInput.y > 0.05f || debugInput.y > 0.05f)
         {
-            SelectNextButton();
+            SelectPreviousButton();
             StartCooldown();
             return;
         }
-        else if (stickInput.y > 0.05f || debugInput.y > 0.05f)
+
+        else if (stickInput.y < -0.05f || debugInput.y < -0.05f)
         {
-            SelectPreviousButton();
+            SelectNextButton();
             StartCooldown();
             return;
         }
@@ -132,7 +131,7 @@ public class ButtonSelectOnController : MonoBehaviour
 
     private void SelectPreviousButton()
     {
-        currentindex = (currentindex - 1) % buttonList.Count;
+        currentindex = (currentindex - 1 + buttonList.Count) % buttonList.Count;
         UpdateButtonSelection();
     }
 

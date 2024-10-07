@@ -94,9 +94,9 @@ public class ButtonSelectOnController : MonoBehaviour
             if (volume != null)
             {
                 if (!volume.onSeVolume)
-                    volume.AddBgmVolume(stickInput.x * 5.0f);
+                    volume.AddBgmVolume(stickInput.x * 0.5f);
                 else
-                    volume.AddSeVolume(stickInput.x * 5.0f);
+                    volume.AddSeVolume(stickInput.x * 0.5f);
             }
         }
 

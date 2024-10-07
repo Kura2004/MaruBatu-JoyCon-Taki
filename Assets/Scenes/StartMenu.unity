@@ -681,7 +681,7 @@ MonoBehaviour:
   inputCooldown: 0.2
   colorTransitionDuration: 0.3
   scaleMultiplier: 1.2
-  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 1, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   buttonTagPairs:
   - index: 0

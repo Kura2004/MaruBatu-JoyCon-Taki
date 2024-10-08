@@ -2073,6 +2073,7 @@ GameObject:
   - component: {fileID: 4730287410791174129}
   - component: {fileID: 4730287410791174130}
   - component: {fileID: 4730287410791174131}
+  - component: {fileID: 4730287410791174132}
   m_Layer: 5
   m_Name: GameOverCanvas
   m_TagString: Untagged
@@ -2379,6 +2380,32 @@ MonoBehaviour:
     tag: Quit
   Is_Locked: 0
   specialTag: 
+--- !u!114 &4730287410791174132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244040536344627821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7bf977619990143b3807118aa4589f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonManager: {fileID: 4730287410791174131}
+  inputCooldown: 0.5
+  colorTransitionDuration: 0.3
+  scaleMultiplier: 1.2
+  selectedColor: {r: 1, g: 1, b: 0, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  buttonTagPairs:
+  - index: 0
+    tag: Retry
+  - index: 1
+    tag: Title
+  - index: 2
+    tag: Quit
+  volume: {fileID: 0}
 --- !u!224 &4988618018700358896
 RectTransform:
   m_ObjectHideFlags: 0

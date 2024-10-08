@@ -217,8 +217,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2093761872}
   - {fileID: 580117248}
+  - {fileID: 2093761872}
   - {fileID: 1783412807}
   - {fileID: 2048965747}
   - {fileID: 1146195035}
@@ -5295,7 +5295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5542824590511981454, guid: 85bb8ae4fb8530d4f852b09fb945a17a, type: 3}
       propertyPath: onDebug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5542824590511981454, guid: 85bb8ae4fb8530d4f852b09fb945a17a, type: 3}
       propertyPath: boundsSize.x
@@ -5473,7 +5473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1070, y: 350}
+  m_AnchoredPosition: {x: -1120, y: 400}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &580117249
@@ -6946,7 +6946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7166466448950357776, guid: 7a9e53d2f63427c459ea3b7717315647, type: 3}
       propertyPath: onDebug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7373,8 +7373,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d70bafd705138c049855bca8b7153826, type: 2}
+  m_sharedMaterial: {fileID: -7784023433475618575, guid: d70bafd705138c049855bca8b7153826, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7801,7 +7801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1268, y: 350}
+  m_AnchoredPosition: {x: 1320, y: 400}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2093761873
@@ -8091,7 +8091,7 @@ MonoBehaviour:
   columns: 4
   spacing: 5
   gridReferenceTransform: {fileID: 7853331954526669866}
-  spawnInterval: 0.1
+  spawnInterval: 0.0625
   activationOrder: 0c0000000d0000000e0000000f00000008000000090000000a0000000b0000000400000005000000060000000700000000000000010000000200000003000000
 --- !u!23 &1627192671085446158
 MeshRenderer:
@@ -8470,7 +8470,7 @@ MonoBehaviour:
   columns: 3
   spacing: 5
   gridReferenceTransform: {fileID: 7853331954526669866}
-  spawnInterval: 0.1
+  spawnInterval: 0.0625
   activationOrder: 060000000700000008000000030000000400000005000000000000000100000002000000
 --- !u!1 &5171092015921322019
 GameObject:
@@ -8885,7 +8885,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

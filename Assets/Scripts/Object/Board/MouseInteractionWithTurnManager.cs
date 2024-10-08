@@ -40,7 +40,7 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.CompareTag("MassSelecter")) return;
+        if (!other.CompareTag("MassSelecter") || IsInteractionBlocked()) return;
 
         // SwitchController‚ÌAƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©‚Ç‚¤‚©‚ðŒŸ’m
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) &&

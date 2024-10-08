@@ -19,6 +19,8 @@ public class CanvasBounce : MonoBehaviour
     protected bool isBouncingComplete = true; // バウンドアニメーションの完了フラグ
     public static bool isBlocked = false;
 
+    [SerializeField] CountdownText countdown;
+
     protected virtual void Start()
     {
         if (dropOnStart)
@@ -59,18 +61,18 @@ public class CanvasBounce : MonoBehaviour
 
             if (dropOnStart)
             {
-                GameTurnManager.Instance.IsGameStarted = true;
-                GameStateManager.Instance.StartBoardSetup(1.6f);
+                GameStateManager.Instance.StartBoardSetup(countdown.GetTotalDuration());
+                StartCoroutine(countdown.StartCountdown());
                 TimeLimitController.Instance.ResetTimer();
                 TimeLimitController.Instance.StopTimer();
-                Destroy(this);
+                dropOnStart = false;
             }
 
             Debug.Log("キャンバスが上昇します");
         }
 
         //ここを変えて欲しい
-        if (Input.GetButtonDown("1P_Back"))
+        if (Input.GetButtonDown("1P_Back") && dropOnStart)
         {
             ScenesLoader.Instance.LoadStartMenu();
             Debug.Log("スタート画面に戻ります");

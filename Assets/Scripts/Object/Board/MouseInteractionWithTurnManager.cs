@@ -6,6 +6,8 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
     [SerializeField]
     private ObjectColorChanger colorChanger; // ObjectColorChanger コンポーネントを参照
 
+    public bool isClicked { get; private set; } = false;
+
     private void Start()
     {
         if (colorChanger == null)
@@ -14,11 +16,12 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
             return;
         }
         colorChanger.ChangeHoverColor(GlobalColorManager.Instance.currentColor);
+        isClicked = false;
     }
 
     private void LateUpdate()
     {
-        if (colorChanger.isClicked) return;
+        if (isClicked) return;
         if (colorChanger.hoverAndClickColor != GlobalColorManager.Instance.currentColor)
         {
             colorChanger.ChangeHoverColor(GlobalColorManager.Instance.currentColor);
@@ -33,14 +36,15 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
     public bool IsInteractionBlocked()
     {
         var stateManager = GameStateManager.Instance;
-        return colorChanger.isClicked ||
-               TimeControllerToggle.isTimeStopped ||
-               !stateManager.IsBoardSetupComplete || stateManager.IsRotating;
+        return //TimeControllerToggle.isTimeStopped ||
+               !stateManager.IsBoardSetupComplete ||
+               stateManager.IsRotating ||
+               isClicked;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.CompareTag("MassSelecter") || IsInteractionBlocked()) return;
+        if (!other.CompareTag("MassSelecter") || isClicked) return;
 
         // SwitchControllerのAボタンが押されたかどうかを検知
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) &&
@@ -64,8 +68,13 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
 
     private void HandleInteraction()
     {
-        if (IsInteractionBlocked()) return;
+        if (IsInteractionBlocked())
+        {
+            ScenesAudio.BlockedSe();
+            return;
+        }
 
+        isClicked = true;
         ScenesAudio.ClickSe();
         // Aボタンが押された際にクリック処理を呼び出す
         colorChanger.HandleClick();

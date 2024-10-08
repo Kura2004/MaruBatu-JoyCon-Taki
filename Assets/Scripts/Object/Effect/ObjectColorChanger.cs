@@ -17,7 +17,7 @@ public class ObjectColorChanger : MonoBehaviour
 
     private Renderer objectRenderer; // オブジェクトのRenderer
     private Tween colorTween; // 色の補完用のTween
-    public bool isClicked { get; private set; } = false;
+    protected bool isClicked = false;
 
     protected bool isChanging = false;
     protected virtual void Start()

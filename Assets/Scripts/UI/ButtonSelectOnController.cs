@@ -54,7 +54,7 @@ public class ButtonSelectOnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!canInput) return;
+        if (!canInput || buttonManager == null) return;
 
         Vector2 stickInput = new Vector2(Input.GetAxis("1P_Select_X"), Input.GetAxis("1P_Select_Y"));
 

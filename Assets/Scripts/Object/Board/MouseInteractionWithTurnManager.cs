@@ -39,12 +39,12 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
         return //TimeControllerToggle.isTimeStopped ||
                !stateManager.IsBoardSetupComplete ||
                stateManager.IsRotating ||
-               isClicked;
+               GameTurnManager.Instance.IsTurnChanging;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.CompareTag("MassSelecter") || isClicked) return;
+        if (!other.CompareTag("MassSelecter") || IsInteractionBlocked()) return;
 
         // SwitchController‚ÌAƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©‚Ç‚¤‚©‚ðŒŸ’m
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) &&
@@ -68,7 +68,7 @@ public class MouseInteractionWithTurnManager : MonoBehaviour
 
     private void HandleInteraction()
     {
-        if (IsInteractionBlocked())
+        if (isClicked)
         {
             ScenesAudio.BlockedSe();
             return;

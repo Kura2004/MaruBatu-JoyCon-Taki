@@ -53,8 +53,6 @@ public class RotatingButtonRight : MonoBehaviour
        !rotatingManager.isSelected)
         {
             ScenesAudio.BlockedSe();
-            Debug.LogError(!rotatingManager.AnyMassClicked() ||
-       !rotatingManager.isSelected);
             return;
         }
 

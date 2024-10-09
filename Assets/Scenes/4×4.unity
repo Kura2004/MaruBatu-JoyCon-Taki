@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 4636159}
   - component: {fileID: 4636158}
   - component: {fileID: 4636160}
-  - component: {fileID: 4636161}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -282,26 +281,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AdjustUIOnEnable: 1
---- !u!114 &4636161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4636152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e9e052a431412244949c5381209d7dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyOnSceneChange: 1
-  sceneSettings:
-  - sceneName: StartMenu
-    loadDuration: 0.7
-  - sceneName: "4\xD74"
-    loadDuration: 0.7
-  - sceneName: GameOver
-    loadDuration: 0.1
 --- !u!224 &115813416 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1261976807923473793, guid: a08d52a6f8b9b1c4f83df02a85894676, type: 3}
@@ -6211,6 +6190,7 @@ GameObject:
   - component: {fileID: 1079793404}
   - component: {fileID: 1079793403}
   - component: {fileID: 1079793402}
+  - component: {fileID: 1079793405}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -6268,6 +6248,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1079793405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079793401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9e052a431412244949c5381209d7dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnSceneChange: 1
+  sceneSettings:
+  - sceneName: StartMenu
+    loadDuration: 0.35
+  - sceneName: "4\xD74"
+    loadDuration: 0.35
+  - sceneName: GameOver
+    loadDuration: 0.3
 --- !u!224 &1139933019 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2044656492180896786, guid: 8f7658f5f1d55c645b9116b42d505878, type: 3}

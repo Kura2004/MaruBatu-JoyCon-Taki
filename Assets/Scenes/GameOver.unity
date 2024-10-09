@@ -1094,6 +1094,7 @@ GameObject:
   - component: {fileID: 1079793404}
   - component: {fileID: 1079793403}
   - component: {fileID: 1079793405}
+  - component: {fileID: 1079793406}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1151,6 +1152,26 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!114 &1079793406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079793401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9e052a431412244949c5381209d7dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnSceneChange: 1
+  sceneSettings:
+  - sceneName: StartMenu
+    loadDuration: 0.35
+  - sceneName: "4\xD74"
+    loadDuration: 0.35
+  - sceneName: GameOver
+    loadDuration: 0.3
 --- !u!1 &1146182085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,7 +1839,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4730287410791174130}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ScenesLoader, Assembly-CSharp
         m_MethodName: LoadStartMenu
         m_Mode: 1
@@ -2071,7 +2092,6 @@ GameObject:
   - component: {fileID: 4139631675138291076}
   - component: {fileID: 4730287410791174128}
   - component: {fileID: 4730287410791174129}
-  - component: {fileID: 4730287410791174130}
   - component: {fileID: 4730287410791174131}
   - component: {fileID: 4730287410791174132}
   m_Layer: 5
@@ -2326,6 +2346,7 @@ MonoBehaviour:
   durationDampingFactor: 0.8
   riseDuration: 0.3
   dropOnStart: 0
+  countdown: {fileID: 0}
 --- !u!114 &4730287410791174129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2339,26 +2360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AdjustUIOnEnable: 1
---- !u!114 &4730287410791174130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244040536344627821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e9e052a431412244949c5381209d7dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyOnSceneChange: 1
-  sceneSettings:
-  - sceneName: StartMenu
-    loadDuration: 0.7
-  - sceneName: "4\xD74"
-    loadDuration: 0.7
-  - sceneName: GameOver
-    loadDuration: 0.3
 --- !u!114 &4730287410791174131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2714,7 +2715,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4730287410791174130}
+      - m_Target: {fileID: 1079793406}
         m_TargetAssemblyTypeName: ScenesLoader, Assembly-CSharp
         m_MethodName: LoadStage44
         m_Mode: 1

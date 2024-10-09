@@ -8,27 +8,19 @@ public class RotatingButtonLeft : MonoBehaviour
     private RotatingMassObjectManager rotatingManager; // 回転処理を管理するマネージャー
 
     [SerializeField]
-    private ObjectColorChanger colorChanger; // 色の変更を管理するコンポーネント
-
-    [SerializeField]
     string selecterTag = "Def";
 
     private bool IsInteractionBlocked()
     {
         return CanvasBounce.isBlocked ||
                TimeControllerToggle.isTimeStopped ||
-               !GameStateManager.Instance.IsBoardSetupComplete ||
-               !rotatingManager.AnyMassClicked() ||
-               !rotatingManager.isSelected;
+               !GameStateManager.Instance.IsBoardSetupComplete;
 
     }
 
     private void Start()
     {
-        if (colorChanger == null)
-        {
-            Debug.LogError("ObjectColorChanger コンポーネントが設定されていません");
-        }
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -59,6 +51,13 @@ public class RotatingButtonLeft : MonoBehaviour
 
     private void HandleClickInteraction()
     {
+        if (!rotatingManager.AnyMassClicked() ||
+!rotatingManager.isSelected)
+        {
+            ScenesAudio.BlockedSe();
+            return;
+        }
+
         TimeLimitController.Instance.StopTimer();
         rotatingManager.StartRotationLeft(); // 左回転を開始
     }

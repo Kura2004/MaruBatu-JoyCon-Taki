@@ -23,14 +23,14 @@ public class ScenesAudio : MonoBehaviour
         switch (scene.name)
         {
             case "StartMenu":
-                //PlayStartMenuBgm();
+                PlayStartMenuBgm();
                 break;
             case "GameOver":
                 //PlayGameOverBgm();
                 break;
             case "4Å~4":
-                //PlayGameBgm();
-                //PauseBgm();
+                PlayGameBgm();
+                PauseBgm();
                 break;
             default:
                 Debug.LogWarning("Unknown scene name: " + scene.name);
@@ -99,6 +99,11 @@ public class ScenesAudio : MonoBehaviour
     public static void HeartSe()
     {
         SoundManager.Instance.PlaySe(SoundManager.SeSoundData.SE.Heart);
+    }
+
+    public static void BlockedSe()
+    {
+        SoundManager.Instance.PlaySe(SoundManager.SeSoundData.SE.Blocked);
     }
 
     // ì¡íËÇÃSEÇÉ~ÉÖÅ[ÉgÇ∑ÇÈ

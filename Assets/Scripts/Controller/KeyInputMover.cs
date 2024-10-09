@@ -19,6 +19,8 @@ public class KeyInputMover : MonoBehaviour
 
     private bool isMoving = false; // ˆÚ“®’†‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
 
+    [SerializeField] bool onDebug = false;
+
     void Update()
     {
         if (isMoving || !GameStateManager.Instance.IsBoardSetupComplete) return; // ˆÚ“®’†‚Í“ü—Í‚ğ–³‹
@@ -27,29 +29,28 @@ public class KeyInputMover : MonoBehaviour
             GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup))
         {
             Handle2PInput();
+            if (onDebug)
+            {
+                debugInput();
+            }
         }
 
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerPlacePiece) ||
             GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.PlayerRotateGroup))
         {
             Handle1PInput();
+            if (onDebug)
+            {
+                debugInput();
+            }
         }
     }
-
-    [SerializeField] bool onDebug = false;
     // Input.GetAxis‚ğg—p‚µ‚ÄˆÚ“®ˆ—
     private void Handle1PInput()
     {
         // Input.GetAxis‚Å‰¡²‚Æc²‚Ì“ü—Í‚ğæ“¾
         float horizontalInput = Input.GetAxis("1P_Select_X");
         float verticalInput = Input.GetAxis("1P_Select_Y");
-
-#if UNITY_EDITOR
-        if (onDebug) {
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
-        }
-#endif
 
         if (Mathf.Abs(horizontalInput) < 0.1f)
         {
@@ -84,14 +85,6 @@ public class KeyInputMover : MonoBehaviour
         float horizontalInput = Input.GetAxis("2P_Select_X");
         float verticalInput = Input.GetAxis("2P_Select_Y");
 
-#if UNITY_EDITOR
-        if (onDebug)
-        {
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
-        }
-#endif
-
         if (Mathf.Abs(horizontalInput) < 0.1f)
         {
             horizontalInput = 0;
@@ -102,7 +95,7 @@ public class KeyInputMover : MonoBehaviour
             verticalInput = 0;
         }
 
-        if(horizontalInput == 0 && verticalInput == 0) { return; }
+        if (horizontalInput == 0 && verticalInput == 0) return;
 
         // ‰¡•ûŒü‚Æc•ûŒü‚Ì“ü—Í‚Ìâ‘Î’l‚ğ”äŠr
         if (Mathf.Abs(horizontalInput) > Mathf.Abs(verticalInput))
@@ -116,6 +109,38 @@ public class KeyInputMover : MonoBehaviour
             // c•ûŒü‚ÌˆÚ“®‚ª—Dæ‚³‚ê‚é
             Vector3 moveDirection = (verticalInput > 0) ? Vector3.forward * verticalMoveDistance : Vector3.back * verticalMoveDistance;
             Debug.Log("c•ûŒü" +  verticalInput);
+            TryMoveInDirection(moveDirection);
+        }
+    }
+
+    private void debugInput()
+    {
+        Vector2 debugInput = new Vector2(Input.GetAxis("Horizontal"),
+    Input.GetAxis("Vertical"));
+
+        if (Mathf.Abs(debugInput.x) < 0.1f)
+        {
+            debugInput.x = 0;
+        }
+
+        if (Mathf.Abs(debugInput.y) < 0.1f)
+        {
+            debugInput.y = 0;
+        }
+
+        if (debugInput.x == 0 && debugInput.y == 0) return;
+
+        // ‰¡•ûŒü‚Æc•ûŒü‚Ì“ü—Í‚Ìâ‘Î’l‚ğ”äŠr
+        if (Mathf.Abs(debugInput.x) > Mathf.Abs(debugInput.y))
+        {
+            // ‰¡•ûŒü‚ÌˆÚ“®‚ª—Dæ‚³‚ê‚é
+            Vector3 moveDirection = (debugInput.x > 0) ? Vector3.right * horizontalMoveDistance : Vector3.left * horizontalMoveDistance;
+            TryMoveInDirection(moveDirection);
+        }
+        else
+        {
+            // c•ûŒü‚ÌˆÚ“®‚ª—Dæ‚³‚ê‚é
+            Vector3 moveDirection = (debugInput.y > 0) ? Vector3.forward * verticalMoveDistance : Vector3.back * verticalMoveDistance;
             TryMoveInDirection(moveDirection);
         }
     }

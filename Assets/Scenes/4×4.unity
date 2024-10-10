@@ -5343,6 +5343,39 @@ MonoBehaviour:
     loadDuration: 0.35
   - sceneName: GameOver
     loadDuration: 1
+--- !u!114 &1242994598 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7629705523822106278, guid: f5e8eb5f7d194754e94f90e0cb4ce903, type: 3}
+  m_PrefabInstance: {fileID: 1990568678}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e47cc5d86079a4bb521356b9d0f822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1242994599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3290027041695344322, guid: f5e8eb5f7d194754e94f90e0cb4ce903, type: 3}
+  m_PrefabInstance: {fileID: 1990568678}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e47cc5d86079a4bb521356b9d0f822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1242994600 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1795439504998216245, guid: f5e8eb5f7d194754e94f90e0cb4ce903, type: 3}
+  m_PrefabInstance: {fileID: 1990568678}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e47cc5d86079a4bb521356b9d0f822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1276374866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5835,7 +5868,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b7bcd9cc6e5f343958968de5daf1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeUI: []
+  fadeUI:
+  - {fileID: 1242994600}
+  - {fileID: 1242994599}
+  - {fileID: 1242994598}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

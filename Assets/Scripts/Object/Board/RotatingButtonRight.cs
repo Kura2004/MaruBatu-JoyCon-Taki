@@ -15,12 +15,6 @@ public class RotatingButtonRight : MonoBehaviour
                TimeControllerToggle.isTimeStopped ||
                !GameStateManager.Instance.IsBoardSetupComplete;
     }
-
-    private void Start()
-    {
-
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (IsInteractionBlocked() || !other.CompareTag(selecterTag))

@@ -142,7 +142,6 @@ public class RotatingMassObjectManager : MonoBehaviour
             if (obj != null)
             {
                 obj.transform.SetParent(null);
-                //obj.GetComponent<ObjectScaler>().ResumeMouseInput();
             }
         }
 

@@ -18,11 +18,6 @@ public class RotatingButtonLeft : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (IsInteractionBlocked() || !other.CompareTag(selecterTag))

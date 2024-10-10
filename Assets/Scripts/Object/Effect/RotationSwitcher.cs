@@ -17,10 +17,14 @@ public class RotationSwitcher : MonoBehaviour
 
     private float currentRotation;
     private bool isRotating = false;
+    private int toggleCounter = 0;
 
+    [SerializeField] DrawAnimationMover DrawAnimation;
+    [SerializeField] UIMoveMediator[] moveMediator;
     private void Start()
     {
         currentRotation = 0f;
+        toggleCounter = 0;
     }
 
     private void StartRotation()
@@ -42,9 +46,11 @@ public class RotationSwitcher : MonoBehaviour
             // 正負を切り替える
             rotationAngle = -rotationAngle;
             currentRotation = endRotation;
+            isRotating = false;
         });
 
         GameTurnManager.Instance.SetTurnChange(false);
+        toggleCounter = 0;
     }
 
     private Tween CreateRotationTween(float endRotation)
@@ -70,19 +76,57 @@ public class RotationSwitcher : MonoBehaviour
 
     private void LateUpdate()
     {
+
+        if (GameWinnerManager.Instance.IsCurrentWinner(GameWinnerManager.Winner.Draw))
+        {
+            ResetRotation();
+        }
+
         if (!GameStateManager.Instance.IsBoardSetupComplete) return;
 
         var turnMana = GameTurnManager.Instance;
         if (turnMana.IsCurrentTurn(GameTurnManager.TurnState.PlayerPlacePiece) && GameTurnManager.Instance.IsTurnChanging)
         {
-            Debug.Log("1Pのターンです");
-            Rotate();
+            toggleCounter++;
+
+            if (toggleCounter == 2)
+            {
+                Debug.Log("1Pのターンです");
+                for (int i = 0; i < moveMediator.Length; i++)
+                    moveMediator[i].MoveToggle();
+                StartRotation();
+            }
         }
 
         if (turnMana.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) && GameTurnManager.Instance.IsTurnChanging)
         {
-            Debug.Log("相手のターンです");
-            Rotate();
+            toggleCounter++;
+
+            if (toggleCounter == 2)
+            {
+                Debug.Log("相手のターンです");
+                for (int i = 0; i < moveMediator.Length; i++)
+                    moveMediator[i].MoveToggle();
+                StartRotation();
+            }
         }
+    }
+
+    private void ResetRotation()
+    {
+        if (isRotating)
+            return;
+
+        isRotating = true;
+        float addAngle = currentRotation + rotationAngle / 2.0f;
+        addAngle *= rotationAngle > 0 ? 1 : -1;
+
+        // 回転を0度にリセットする
+        transform.DORotate(new Vector3(0, 0, addAngle), duration
+            , RotateMode.LocalAxisAdd).SetEase(rotationEase)
+            .OnComplete(() =>
+            {
+                DrawAnimation.MoveOutward();
+            });
     }
 }

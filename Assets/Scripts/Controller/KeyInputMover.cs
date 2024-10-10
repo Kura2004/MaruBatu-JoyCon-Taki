@@ -23,7 +23,8 @@ public class KeyInputMover : MonoBehaviour
 
     void Update()
     {
-        if (isMoving || !GameStateManager.Instance.IsBoardSetupComplete) return; // ˆÚ“®’†‚Í“ü—Í‚ð–³Ž‹
+        if (isMoving || !GameStateManager.Instance.IsBoardSetupComplete ||
+            GameStateManager.Instance.IsRotating) return;
 
         if (GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentPlacePiece) ||
             GameTurnManager.Instance.IsCurrentTurn(GameTurnManager.TurnState.OpponentRotateGroup))

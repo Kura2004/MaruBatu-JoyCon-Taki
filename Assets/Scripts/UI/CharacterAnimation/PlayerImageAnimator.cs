@@ -45,6 +45,15 @@ public class PlayerImageAnimator : MonoBehaviour
             }
         }
 
+        foreach (var image in winImages)
+        {
+            if (image != null)
+            {
+                image.enabled = false;
+                image.color = Color.clear;
+            }
+        }
+
         loopCounter = 0;
     }
 
@@ -170,6 +179,18 @@ public class PlayerImageAnimator : MonoBehaviour
     public void ChangeSpritesColor(Color targetColor, float duration)
     {
         foreach (var image in images)
+        {
+            if (image != null)
+            {
+                image.DOColor(targetColor, duration)
+                    .SetEase(Ease.InExpo); // éwíËÇµÇΩéûä‘Ç≈êFÇï‚äÆ
+            }
+        }
+    }
+
+    public void ChangeWinSpritesColor(Color targetColor, float duration)
+    {
+        foreach (var image in winImages)
         {
             if (image != null)
             {

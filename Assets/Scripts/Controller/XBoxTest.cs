@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class XBoxTest : MonoBehaviour
 {
+    private Vector2 input;
     // Update is called once per frame
     void Update()
     {
+        input = new Vector2(Input.GetAxis("1P_Select_X"), Input.GetAxis("1P_Select_Y"));
+
+        Debug.Log("’l‚Í : " + input);
+
         if(Input.GetButtonDown("1P_Decision"))
         {
             Debug.Log("1P_Aƒ{ƒ^ƒ“");
